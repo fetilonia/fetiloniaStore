@@ -14,8 +14,8 @@ param(
 
 $source = Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\\* | Where-Object displayname -like '*confi*'
 
-"Date,Time,Message,Category,ResultCode" > "$Logpath\$day`_$Comp`_SCCMAgentJob.csv"
-"$date,$time,Collecting Configuration Manager Installation Info,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+"Date,Time,Hostname,Message,Category,ResultCode" > "$Logpath\$day`_$Comp`_SCCMAgentJob.csv"
+"$date,$time,HostName,Collecting Configuration Manager Installation Info,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
 
 #######################
 #region Define cmdlet #
@@ -61,44 +61,44 @@ foreach ($com in $comp) {
         # Installed Version Check
         if ($CurrentVersion -lt $CompareVersion.build) {
             try {
-                "$date,$time,CCMsetup.exe File Copy to Temp Folder,information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+                "$date,$time,HostName,CCMsetup.exe File Copy to Temp Folder,information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
                 Copy-Item \\ad1.dpi.co.kr\NETLOGON\SCCMAgent\ccmsetup.exe c:\temp\
                 Start-Sleep -Seconds 2
                 try {
                     &$DefaultPathRun
                     &$Loop
 
-                    "$date,$time,SCCM Agent Install Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+                    "$date,$time,HostName,SCCM Agent Install Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
                 }
                 catch {
-                    "$date,$time,Error : $($_.Exception.Message),InstallFail from Setup Loop,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
+                    "$date,$time,HostName,Error : $($_.Exception.Message),InstallFail from Setup Loop,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
                     exit
                 }
             }
             catch {
-                "$date,$time,Error : $($_.Exception.Message) from File Copy Action,CopyError,10" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+                "$date,$time,HostName,Error : $($_.Exception.Message) from File Copy Action,CopyError,10" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
                 exit
             }
             
         }
         else {
-            "$date,$time,SCCM Agent Version is Newest ,VersionEnd ,100" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+            "$date,$time,HostName,SCCM Agent Version is Newest ,VersionEnd ,100" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
             $ReInstall = 0
         }
     }
     else {
-        "$date,$time,SCCM Agent Not Installed Check,information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+        "$date,$time,HostName,SCCM Agent Not Installed Check,information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
         try {
-            "$date,$time,CCMsetup.exe File Copy to Temp Folder,information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+            "$date,$time,HostName,CCMsetup.exe File Copy to Temp Folder,information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
             Copy-Item \\ad1.dpi.co.kr\SYSVOL\dpi.co.kr\scripts\SCCMAgent\ccmsetup.exe c:\temp\
             &$TempPathRun
             &$Loop
             $ReInstall = 0
 
-            "$date,$time,SCCM Agent Install Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+            "$date,$time,HostName,SCCM Agent Install Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
         }
         catch {
-            "$date,$time,Error : $($_.Exception.Message) from NotInstalled to Setup Action,InstallFail,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
+            "$date,$time,HostName,Error : $($_.Exception.Message) from NotInstalled to Setup Action,InstallFail,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
             exit
         }
     }
@@ -115,14 +115,14 @@ foreach ($com in $comp) {
             if ($ReInstall -eq 1) {
                 &$UnInstall
                 &$Loop
-                "$date,$time,SCCM Agent UnInstall Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+                "$date,$time,HostName,SCCM Agent UnInstall Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
             }
             else {
-                "$date,$time,Agent reInstall Process Check,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+                "$date,$time,HostName,Agent reInstall Process Check,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
             }
         }
         catch {
-            "$date,$time,Error : $($_.Exception.Message), from after Health Check Uninstall Action,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
+            "$date,$time,HostName,Error : $($_.Exception.Message), from after Health Check Uninstall Action,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
             exit
         }
         
@@ -131,15 +131,15 @@ foreach ($com in $comp) {
             &$TempPathRun
             &$Loop
 
-            "$date,$time,SCCM Agent reInstall Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+            "$date,$time,HostName,SCCM Agent reInstall Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
         }
         catch {
-            "$date,$time,Error : $($_.Exception.Message), from after ReInstall at UnInstall Action,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
+            "$date,$time,HostName,Error : $($_.Exception.Message), from after ReInstall at UnInstall Action,20" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"    
             exit
         }
     }
     else {
-        "$date,$time,Asset Scheduled Task Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+        "$date,$time,HostName,Asset Scheduled Task Compleate,Information,0" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
     }
 }  
 
@@ -216,7 +216,7 @@ foreach ($SCCMTask in $Task) {
         -Name $($Head[$HeadValue]) `
         -Value $(if ($SCCMTask.ReturnValue -ne $null) { 
             $SCCMTask.ReturnValue 
-            "$date,$time,$($Head[$HeadValue]) Value is $($SCCMTask.ReturnValue),TaskResult,200" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
+            "$date,$time,HostName,$($Head[$HeadValue]) Value is $($SCCMTask.ReturnValue),TaskResult,200" >> "$Logpath\$day`_$comp`_SCCMAgentJob.csv"
         } 
         else { 'OK' }
     )
