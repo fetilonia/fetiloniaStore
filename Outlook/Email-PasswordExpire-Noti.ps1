@@ -1,23 +1,16 @@
 <#
-The purpose of this script is to email all users that their password is about to expire
-days before the password expires. It is also to give them the various instructions on how
-to change their password in various environments (Like working away from the office on a
-domain-connected laptop).
+이 스크립트는 DC 의 모든 사용자 중 패스워드 만료일자가 90일이 지났지만
+Today - 10 보다 낮은 User Object 를 필터링 후 개체의 Email 주소로 $From 변수의 주소로 메일을 작성한다.
 
-Requirements: Active Directory module - installed with RSAT.
+Line 15, 21, 34, 61 을 수정해서 사용하면 된다.
 
-Edit the variables below to match your environment. Create a scheduled task to run it daily
-at the time you wish. The action of the scheduled task should have the "Program/script"
-field as the path to PowerShell on that server.
-eg: %SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe
-The arguments line should have "-ExecutionPolicy Bypass " and then the path to this script.
-eg: -ExecutionPolicy Bypass C:\Scripts\Email-PasswordExpiry.ps1
+Created by : fetilonia
+
 #>
 
 
-
 ################################
-#           Variables          #
+#region      Variables         #
 ################################
 
 # Email account to send the email from
@@ -44,7 +37,7 @@ $TestingUsername = "Test User SamAccountName"
 
 
 ################################
-# Don't modify below this line #
+#endregion Variables           #
 ################################
 
 ### Attempts to Import ActiveDirectory Module. Produces error if fails.
@@ -67,9 +60,8 @@ else {
 	
 	$CommandToGetInfoFromAD = Get-ADUser -SearchBase <#OU Name#> -Filter * `
 		-properties PasswordLastSet, PasswordExpired, PasswordNeverExpires, EmailAddress, GivenName | `
-		Where-Object { $_.distinguishedname -notlike '<#Filter Condition#>' -and ($_.passwordlastset + [timespan]::FromDays(90)) -lt (get-date).AddDays(-10) } | Select-Object name, passwordlastset
+		Where-Object { $_.distinguishedname -notlike '<#Filter Condition#>' -and ($_.passwordlastset + [timespan]::FromDays(90)) -lt (get-date).AddDays(-10) }
            
-	#$CommandToGetInfoFromAD = Get-ADUser NRP165035 -Properties *
 }
 
 
@@ -151,7 +143,6 @@ E-Mail : <a href="mailto:ithelpdesk@noroo.com">ithelpdesk@noroo.com</a></span>
 
 <#
 Version Notes:
-1.0 - Intial Release - Made changes to original script to add a better message, allow html, create a testing
-      section, setup a changable variable for days before expiry.
+1.0 - Intial Release - 기본 프레임워크 생성 및 검색 조건자 지정. ((패스워드 변경일자 + 90일)<(오늘날짜 - 10))
+					   HTML 기본 형식 지정. 추후 CSS Style 지정 후 지저분한 Line 별 Span Type 수정 예정.
 #>
-# EOF
