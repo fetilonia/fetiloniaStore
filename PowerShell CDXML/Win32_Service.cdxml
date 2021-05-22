@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+  <Class ClassName="Root/CIMV2/Win32_Service" ClassVersion="2.0">
+    <Version>1.0</Version>
+    <DefaultNoun>WmiService</DefaultNoun>
+    <InstanceCmdlets>
+      
+      <GetCmdletParameters DefaultCmdletParameterSet="ByName">
+        <QueryableProperties>
+          <Property PropertyName="Name">
+            <Type PSType="system.string" />
+            <RegularQuery AllowGlobbing="false">
+              <CmdletParameterMetadata Position="0" CmdletParameterSets="ByName" IsMandatory="false" />
+            </RegularQuery>
+          </Property>
+        </QueryableProperties>
+      </GetCmdletParameters>
+
+      <GetCmdlet>
+        <CmdletMetadata Verb="Get" />
+        <GetCmdletParameters DefaultCmdletParameterSet="ByName">
+          <QueryableProperties>
+            <Property PropertyName="AcceptPause">
+              <Type PSType="switch" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="AcceptStop">
+              <Type PSType="switch" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="CheckPoint">
+              <Type PSType="system.uint32" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="CreationClassName">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="DelayedAutoStart">
+              <Type PSType="switch" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="Description">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="DesktopInteract">
+              <Type PSType="switch" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="DisplayName">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="ErrorControl">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false">
+                  <ValidateSet>
+                    <AllowedValue>Ignore</AllowedValue>
+                    <AllowedValue>Normal</AllowedValue>
+                    <AllowedValue>Severe</AllowedValue>
+                    <AllowedValue>Critical</AllowedValue>
+                    <AllowedValue>Unknown</AllowedValue>
+                  </ValidateSet>
+                </CmdletParameterMetadata>
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="ExitCode">
+              <Type PSType="system.uint32" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="InstallDate">
+              <Type PSType="system.datetime" />
+              <MinValueQuery>
+                <CmdletParameterMetadata PSName="BeforeInstallDate" />
+              </MinValueQuery>
+              <MaxValueQuery>
+                <CmdletParameterMetadata PSName="AfterInstallDate" />
+              </MaxValueQuery>
+            </Property>
+            <Property PropertyName="Name">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata Position="0" CmdletParameterSets="ByName" IsMandatory="false" />
+              </RegularQuery>
+              <ExcludeQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" PSName="ExcludeName" CmdletParameterSets="ByName" />
+              </ExcludeQuery>
+            </Property>
+            <Property PropertyName="PathName">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="ProcessId">
+              <Type PSType="system.uint32" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata Position="0" CmdletParameterSets="ByProcessId" IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="ServiceSpecificExitCode">
+              <Type PSType="system.uint32" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="ServiceType">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false">
+                  <ValidateSet>
+                    <AllowedValue>Kernel Driver</AllowedValue>
+                    <AllowedValue>File System Driver</AllowedValue>
+                    <AllowedValue>Adapter</AllowedValue>
+                    <AllowedValue>Recognizer Driver</AllowedValue>
+                    <AllowedValue>Own Process</AllowedValue>
+                    <AllowedValue>Share Process</AllowedValue>
+                    <AllowedValue>Interactive Process</AllowedValue>
+                  </ValidateSet>
+                </CmdletParameterMetadata>
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="Started">
+              <Type PSType="switch" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="StartMode">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false">
+                  <ValidateSet>
+                    <AllowedValue>Boot</AllowedValue>
+                    <AllowedValue>System</AllowedValue>
+                    <AllowedValue>Auto</AllowedValue>
+                    <AllowedValue>Manual</AllowedValue>
+                    <AllowedValue>Disabled</AllowedValue>
+                  </ValidateSet>
+                </CmdletParameterMetadata>
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="StartName">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="State">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false">
+                  <ValidateSet>
+                    <AllowedValue>Stopped</AllowedValue>
+                    <AllowedValue>Start Pending</AllowedValue>
+                    <AllowedValue>Stop Pending</AllowedValue>
+                    <AllowedValue>Running</AllowedValue>
+                    <AllowedValue>Continue Pending</AllowedValue>
+                    <AllowedValue>Pause Pending</AllowedValue>
+                    <AllowedValue>Paused</AllowedValue>
+                    <AllowedValue>Unknown</AllowedValue>
+                  </ValidateSet>
+                </CmdletParameterMetadata>
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="Status">
+              <Type PSType="system.string" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="TagId">
+              <Type PSType="system.uint32" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="false" />
+              </RegularQuery>
+            </Property>
+            <Property PropertyName="WaitHint">
+              <Type PSType="system.uint32" />
+              <MinValueQuery>
+                <CmdletParameterMetadata PSName="MinWaitHint" />
+              </MinValueQuery>
+              <MaxValueQuery>
+                <CmdletParameterMetadata PSName="MaxWaitHint" />
+              </MaxValueQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </GetCmdlet>
+
+      <!--Get-ServiceSecurityDescriptor: invoking method GetSecurityDescriptor():-->
+      <Cmdlet>
+        <!--defining the ConfirmImpact which indicates how severe the changes are that this cmdlet performs-->
+        <CmdletMetadata Verb="Get" Noun="WmiServiceSecurityDescriptor" ConfirmImpact="Low" />
+        <!--defining the WMI instance method used by this cmdlet:-->
+        <Method MethodName="GetSecurityDescriptor">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <!--defining the parameters of this cmdlet:-->
+          <Parameters>
+            <!--Method returns an instance of Win32_SecurityDescriptor in property Descriptor-->
+            <Parameter ParameterName="Descriptor">
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance[]" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+
+      <Cmdlet>
+        <!-- 서비스 중지 -->
+        <CmdletMetadata Verb='Stop' Noun='WmiService' ConfirmImpact='High' />
+        <!-- Define WMI instance method used by this cmdlet:-->
+        <Method MethodName="StopService">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+        </Method>
+      </Cmdlet>
+
+       <Cmdlet>
+        <!-- 서비스 시작 -->
+        <CmdletMetadata Verb='Start' Noun='WmiService' ConfirmImpact='High' />
+        <!-- Define WMI instance method used by this cmdlet:-->
+        <Method MethodName="StartService">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+        </Method>
+      </Cmdlet>
+
+      <Cmdlet>
+        <!-- 서비스 중지 -->
+        <CmdletMetadata Verb='Set' Noun='PauseWmiService' ConfirmImpact='High' />
+        <!-- Define WMI instance method used by this cmdlet:-->
+        <Method MethodName="PauseService">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+        </Method>
+      </Cmdlet>
+
+      <Cmdlet>
+        <!-- 서비스 재개 -->
+        <CmdletMetadata Verb='Set' Noun='ResumeWmiService' ConfirmImpact='High' />
+        <!-- Define WMI instance method used by this cmdlet:-->
+        <Method MethodName="ResumeService">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+        </Method>
+      </Cmdlet>
+
+      <Cmdlet>
+        <!-- 서비스 시작 모드 변경 -->
+        <CmdletMetadata Verb='Edit' Noun='WmiServiceStartMode' ConfirmImpact='High' />
+        <!-- Define WMI instance method used by this cmdlet:-->
+        <Method MethodName="ChangeStartMode">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <!-- Defined ChangeStartMode Parameter Name is Startmode -->
+            <Parameter ParameterName="StartMode">
+            <!-- 기본 매개변수 유형은 System.string (Modelist = Boot, System, Automatic, Manual, Disabled)-->
+            <Type PSType="system.String" />
+              <CmdletParameterMetadata Position="0" IsMandatory="false" >
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+                
+              </CmdletParameterMetadata>
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+
+       <Cmdlet>
+        <!-- 서비스 속성 변경 -->
+        <CmdletMetadata Verb='Edit' Noun='WmiServiceProperty' ConfirmImpact='High' />
+        <!-- Define WMI instance method used by this cmdlet:-->
+        <Method MethodName="Change">
+          <ReturnValue>
+            <Type PSType="system.uint32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <!-- Defined Change Parameter Name is DisplayName -->
+            <Parameter ParameterName="DisplayName">
+              <!-- 기본 매개변수 유형 System.string -->
+              <Type PSType="system.String" />
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is PathName -->
+            <Parameter ParameterName="PathName">
+              <!-- 기본 매개변수 유형 System.string -->
+              <Type PSType="system.String" />
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is ServiceType -->
+            <Parameter ParameterName="ServiceType">
+              <!-- 기본 매개변수 유형 System.uint32 (TypeList = 1(Kernel Driver[0x1]), 2 (FileSystem Driver[0x2]), 4(Adapter[0x4]), 8(Recognizer Driver[0x8]), 
+              16(Own Process[0x10]), 32(Share Process[0x20]), 256(Interactive Process[0x100]))-->
+              <Type PSType="system.uint32" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is ErrorControl -->
+            <Parameter ParameterName="ErrorControl">
+              <!-- 기본 매개변수 유형 System.uint32 (List = 0(Ignore), 1(Normal), 2(Servere), 3(Critical))-->
+              <Type PSType="system.uint32" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is StartName -->
+            <Parameter ParameterName="StartName">
+              <!-- 기본 매개변수 유형 System.String -->
+              <Type PSType="system.string" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is StartPassword -->
+            <Parameter ParameterName="StartPassword">
+              <!-- 기본 매개변수 유형 System.String -->
+              <!-- 로컬 시스템에서 네트워크 또는 네트워크에서 로컬 시스템으로 서비스를 변경할 때 StartPassword 는 Null 이 아닌 빈 문자열 ("") 이어야 한다. -->
+              <Type PSType="system.string" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is DesktopInteract -->
+            <Parameter ParameterName="DesktopInteract">
+              <!-- 기본 매개변수 유형 System.Switch -->
+              <Type PSType="switch" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is LocalOrderGroup -->
+            <Parameter ParameterName="LoadOrderGroup">
+              <!-- 기본 매개변수 유형 System.String -->
+              <Type PSType="system.string" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is LoadOrderGroupDependencies -->
+            <Parameter ParameterName="LoadOrderGroupDependencies">
+              <!-- 기본 매개변수 유형 System.String[]] -->
+              <Type PSType="system.string[]]" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+            <!-- Defined Change Parameter Name is ServiceDependencies -->
+            <Parameter ParameterName="ServiceDependencies">
+              <!-- 기본 매개변수 유형 System.String[]] -->
+              <Type PSType="system.string[]]" /> 
+                <CmdletParameterMetadata IsMandatory="false" />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+
+    </InstanceCmdlets>
+  </Class>
+</PowerShellMetadata>

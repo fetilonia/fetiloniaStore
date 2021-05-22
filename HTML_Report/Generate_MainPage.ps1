@@ -1,18 +1,14 @@
 ﻿
 begin {
   
-  # adLockDown, CrossNet, ADDC Console Screen Capture File Copy
-  Copy-Item \\<#HTML Path#>\HTML\*.png <#Local Path#>\Image\ -Force
-  
-  # Internet Zone Daily Report File Copy 
-  Copy-Item <#Local HTML Path#>\HTM -Recurse \\<#Remote Path#>\Daily -Force
-  Copy-Item <#Local HTML Path#>\Prop -Recurse \\<#Remote Path#>\Daily -Force
+  # Capture File Path
+  Copy-Item 'SourcePath\*.png' 'TargetPath\' -Force
   
   # WorkGroup Zone Daily Report File Copy
   $Today = Get-Date
-  $FilePath = 'Image Path'
+  $FilePath = 'Report Files Path'
   $FileCheck = Get-ChildItem ("$filepath`*.csv", "$filepath`*.htm") | Where-Object { $_.lastwritetime -ge [datetime]::new($Today.Year, $Today.Month, $Today.Day) }
-  $CopyPath = 'Copy File Path'
+  $CopyPath = '\\AD SYSVOL\Destination Path'
   if ($FileCheck) {
     $FileCheck | Where-Object name -like '*htm' | ForEach-Object { Copy-Item $_.pspath $CopyPath\HTM }
     $FileCheck | Where-Object name -like '*csv' | ForEach-Object { Copy-Item $_.pspath $CopyPath\Prop }
@@ -21,10 +17,10 @@ begin {
 
 process {
   ##################################
-  #region  ======== Image Set ========
+  #region  ======== Image Set ========   보고서 표지에 사용할 그림 파일 Hash 화
   ################################## 
   #Logo 
-  $LogoImagePath = 'Define Logo Path'
+  $LogoImagePath = 'Source Image File Path'
   $LogoImageBits = [Convert]::ToBase64String((Get-Content $LogoImagePath -Encoding Byte))
   $LogoImageFile = Get-Item $LogoImagePath
   $LogoImageType = $LogoImageFile.Extension.Substring(1)
@@ -92,7 +88,7 @@ h2 {
 
 .OK1
 {
-  background-image:url(image url path/file ex)file//filepath/folder/file.exe);
+  background-image:url(file path ex)file://ad sysvol/file.png);
   background-repeat: no-repeat;
   background-position: center;
   font-size:0px;
@@ -100,7 +96,7 @@ h2 {
 
 .NG
 {
-  background-image:url(image url path/file ex)file//filepath/folder/file.exe);
+  background-image:url(file path ex)file://ad sysvol/file.png);
   background-repeat: no-repeat;
   background-position: center;
   font-size:0px;
@@ -165,12 +161,13 @@ h2 {
   ########################################
 
   $Today = Get-Date -UFormat "%Y-%m-%d"  
-  $ServerName = 'Check Target Servers ex)server1, server2'
+  $ServerName = 'Server Names ex)server1, server2 ...'
 
   # Var Clear
   $obj = $result = [xml]$Modify = $body = $disk1 = $disk2 = $disk3 = $disk4 = ''
 
-  $FilePath = 'unc file path ex)\\fileserver\sharefolder'
+  #$ServerName = 'D009TD4231','IMAD1','IMAD2','IMADTP','IMADDR','IMADDR2'
+  $FilePath = 'File Copy Destination Path'
 
 
 
@@ -409,7 +406,7 @@ h2 {
   ##############################################
 
   $body = @"
-<H1>$(Get-Date -f 'yy.MM.dd') - <회사명> 일일점검</H1>
+<H1>$(Get-Date -f 'yy.MM.dd') - 일일점검</H1>
 <br>
 
 <input type="button" class="button" value="Console Report" button onclick="myFunction()">
@@ -418,8 +415,9 @@ h2 {
 <div id="myDIV" style="display:none">
   <table>
     <colgroup><col/><col/><col/></colgroup>
-    <tr><th>CrossNet</th></tr>
-    <tr><td>DefineImage ex)$blaimagetag</td></tr>
+    <tr><th>blabla</th></tr>
+    <tr><td>$ImageTagVar</td>
+    
   </table>
   </div>
 
@@ -464,7 +462,7 @@ function myFunction() {
 }
 
 end {
-  ConvertTo-Html -Head $head -body $body | Out-File "C:\Users\Administrator\Desktop\운영서버_일일점검_$("{0:yyyyMMdd}" -f (Get-Date)).htm"
+  ConvertTo-Html -Head $head -body $body | Out-File "ReportFilePath\운영서버_일일점검_$("{0:yyyyMMdd}" -f (Get-Date)).htm"
 }
 
 

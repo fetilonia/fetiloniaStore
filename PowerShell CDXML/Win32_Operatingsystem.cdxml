@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+
+  <!--referencing the WMI class this cdxml uses-->
+  <Class ClassName="root/cimv2/Win32_OperatingSystem" ClassVersion="2.0">
+    <Version>1.0.0.0</Version>
+
+    <!--default noun used by Get-cmdlets and when no other noun is specified. By convention, we use the prefix "WMI" and the base name of the WMI class involved. This way, you can easily identify the underlying WMI class.-->
+    <DefaultNoun>WmiOperatingSystem</DefaultNoun>
+
+    <!--define the cmdlets that work with class instances.-->
+    <InstanceCmdlets>
+      <!--query parameters to select instances. This is typically empty for classes that provide only one instance-->
+      <GetCmdletParameters />
+      
+      <!--defines a new cmdlet that acts on instances-->
+      <Cmdlet>
+        <CmdletMetadata Verb="Set" ConfirmImpact="High"/>
+        <!--modifies properties of an instance-->
+        <Method MethodName="cim:ModifyInstance">
+          <!--each parameter modifies one property-->
+          <Parameters>
+            <!--modifies property Description-->
+            <Parameter ParameterName="Description">
+              <Type PSType="string" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true">
+                <AllowEmptyString />
+                <ValidateNotNull />
+              </CmdletParameterMetadata>
+              
+              <!--modifies property ForegroundApplicationBoost-->
+              </Parameter>
+              <Parameter ParameterName="ForegroundApplicationBoost">
+                <!--uses a custom type that is defined later in Enums-->
+                <Type PSType="Win32_OperatingSystem.ForegroundApplicationBoost" />
+                <CmdletParameterMetadata ValueFromPipelineByPropertyName="true">
+                  <ValidateNotNull />
+                  <ValidateNotNullOrEmpty />
+                </CmdletParameterMetadata>
+              </Parameter>
+            </Parameters>
+          </Method>
+          <GetCmdletParameters /> 
+        </Cmdlet>
+
+          <!--Invoke-OperatingSystemReboot: invoking method Reboot():-->
+          <Cmdlet>
+            <!--defining the ConfirmImpact which indicates how severe the changes are that this cmdlet performs-->
+            <CmdletMetadata Verb="Invoke" Noun="WmiOperatingSystemReboot" ConfirmImpact="High" />
+            <!--defining the WMI instance method used by this cmdlet:-->
+            <Method MethodName="Reboot">
+              <ReturnValue>
+                <Type PSType="system.uint32" />
+                <CmdletOutputMetadata>
+                  <ErrorCode />
+                </CmdletOutputMetadata>
+              </ReturnValue>
+            </Method>
+          </Cmdlet>
+
+          <!--Set-OperatingSystemDateTime: invoking method SetDateTime():-->
+          <Cmdlet>
+            <!--defining the ConfirmImpact which indicates how severe the changes are that this cmdlet performs-->
+            <CmdletMetadata Verb="Set" Noun="WmiOperatingSystemDateTime" ConfirmImpact="High" />
+            <!--defining the WMI instance method used by this cmdlet:-->
+            <Method MethodName="SetDateTime">
+              <ReturnValue>
+                <Type PSType="system.uint32" />
+                <CmdletOutputMetadata>
+                  <ErrorCode />
+                </CmdletOutputMetadata>
+              </ReturnValue>
+              <!--defining the parameters of this cmdlet:-->
+              <Parameters>
+                <!--native parameter name is 'LocalDateTime'-->
+                <Parameter ParameterName="LocalDateTime">
+                  <!--the underlying parameter type is DateTime which corresponds to the PowerShell .NET type [system.DateTime]-->
+                  <Type PSType="system.DateTime" />
+                  <CmdletParameterMetadata IsMandatory="false">
+                    <ValidateNotNull />
+                    <ValidateNotNullOrEmpty />
+                  </CmdletParameterMetadata>
+                </Parameter>
+              </Parameters>
+            </Method>
+          </Cmdlet>
+
+          <!--Invoke-OperatingSystemShutdown: invoking method Shutdown():-->
+          <Cmdlet>
+            <!--defining the ConfirmImpact which indicates how severe the changes are that this cmdlet performs-->
+            <CmdletMetadata Verb="Invoke" Noun="WmiOperatingSystemShutdown" ConfirmImpact="High" />
+            <!--defining the WMI instance method used by this cmdlet:-->
+            <Method MethodName="Shutdown">
+              <ReturnValue>
+                <Type PSType="system.uint32" />
+                <CmdletOutputMetadata>
+                  <ErrorCode />
+                </CmdletOutputMetadata>
+              </ReturnValue>
+            </Method>
+          </Cmdlet>
+
+          <!--Invoke-OperatingSystemWin32Shutdown: invoking method Win32Shutdown():-->
+          <Cmdlet>
+            <!--defining the ConfirmImpact which indicates how severe the changes are that this cmdlet performs-->
+            <CmdletMetadata Verb="Invoke" Noun="WmiOperatingSystemWin32Shutdown" ConfirmImpact="High" />
+            <!--defining the WMI instance method used by this cmdlet:-->
+            <Method MethodName="Win32Shutdown">
+              <ReturnValue>
+                <Type PSType="system.uint32" />
+                <CmdletOutputMetadata>
+                  <ErrorCode />
+                </CmdletOutputMetadata>
+              </ReturnValue>
+              <!--defining the parameters of this cmdlet:-->
+              <Parameters>
+                <!--native parameter name is 'Flags'-->
+                <Parameter ParameterName="Flags">
+                  <!--the underlying parameter type is SInt32 which really is the enumeration [Win32_OperatingSystem.Flags] that is defined below in the Enums node:-->
+                  <Type PSType="Win32_OperatingSystem.Flags" />
+                  <CmdletParameterMetadata IsMandatory="false">
+                    <ValidateNotNull />
+                    <ValidateNotNullOrEmpty />
+                  </CmdletParameterMetadata>
+                </Parameter>
+              </Parameters>
+            </Method>
+          </Cmdlet>
+
+          <!--Invoke-OperatingSystemWin32ShutdownTracker: invoking method Win32ShutdownTracker():-->
+          <Cmdlet>
+            <!--defining the ConfirmImpact which indicates how severe the changes are that this cmdlet performs-->
+            <CmdletMetadata Verb="Invoke" Noun="WmiOperatingSystemWin32ShutdownTracker" ConfirmImpact="High" />
+            <!--defining the WMI instance method used by this cmdlet:-->
+            <Method MethodName="Win32ShutdownTracker">
+              <ReturnValue>
+                <Type PSType="system.uint32" />
+                <CmdletOutputMetadata>
+                  <ErrorCode />
+                </CmdletOutputMetadata>
+              </ReturnValue>
+              <!--defining the parameters of this cmdlet:-->
+              <Parameters>
+                <!--native parameter name is 'Flags'-->
+                <Parameter ParameterName="Flags">
+                  <!--the underlying parameter type is SInt32 which really is the enumeration [Win32_OperatingSystem.Flags] that is defined below in the Enums node:-->
+                  <Type PSType="Win32_OperatingSystem.Flags" />
+                  <CmdletParameterMetadata IsMandatory="false">
+                    <ValidateNotNull />
+                    <ValidateNotNullOrEmpty />
+                  </CmdletParameterMetadata>
+                </Parameter>
+                <!--native parameter name is 'Timeout'-->
+                <Parameter ParameterName="Timeout">
+                  <!--the underlying parameter type is UInt32 which corresponds to the PowerShell .NET type [system.UInt32]-->
+                  <Type PSType="system.UInt32" />
+                  <CmdletParameterMetadata IsMandatory="false">
+                    <ValidateNotNull />
+                    <ValidateNotNullOrEmpty />
+                  </CmdletParameterMetadata>
+                </Parameter>
+                <!--native parameter name is 'Comment'-->
+                <Parameter ParameterName="Comment">
+                  <!--the underlying parameter type is String which corresponds to the PowerShell .NET type [system.String]-->
+                  <Type PSType="system.String" />
+                  <CmdletParameterMetadata IsMandatory="false">
+                    <ValidateNotNull />
+                    <ValidateNotNullOrEmpty />
+                  </CmdletParameterMetadata>
+                </Parameter>
+                <!--native parameter name is 'ReasonCode'-->
+                <Parameter ParameterName="ReasonCode">
+                  <!--the underlying parameter type is UInt32 which corresponds to the PowerShell .NET type [system.UInt32]-->
+                  <Type PSType="system.UInt32" />
+                  <CmdletParameterMetadata IsMandatory="false">
+                    <ValidateNotNull />
+                    <ValidateNotNullOrEmpty />
+                  </CmdletParameterMetadata>
+                </Parameter>
+              </Parameters>
+            </Method>
+          </Cmdlet>
+    </InstanceCmdlets>
+    
+    <CmdletAdapterPrivateData>
+	  <Data Name="ClientSideShouldProcess" />
+    </CmdletAdapterPrivateData>
+  </Class>
+  
+  <!--defines custom types-->
+  <Enums>
+    <!--defines the custom type for ForegroundApplicationBoost-->
+	<Enum EnumName="Win32_OperatingSystem.ForegroundApplicationBoost" UnderlyingType="System.Byte">
+    	<Value Name="None" Value="0" />
+      	<Value Name="Minimum" Value="1" />
+      	<Value Name="Maximum" Value="2" />
+    </Enum>
+    
+    <!--defines the bits for the Flags argument that is used by all reboot methods-->
+    <Enum EnumName="Win32_OperatingSystem.Flags" UnderlyingType="System.Int32" BitwiseFlags="true">
+      <Value Name="Logoff" Value="0" />
+      <Value Name="Shutdown" Value="1" />
+      <Value Name="Reboot" Value="2" />
+      <Value Name="Force" Value="4" />
+      <Value Name="PowerOff" Value="8" />
+    </Enum>
+  </Enums>
+</PowerShellMetadata>
