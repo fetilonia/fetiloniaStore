@@ -58,9 +58,9 @@ if ($SetupForTesting -eq "Yes") {
 }
 else {
 	
-	$CommandToGetInfoFromAD = Get-ADUser -SearchBase <#OU Name#> -Filter * `
-		-properties PasswordLastSet, PasswordExpired, PasswordNeverExpires, EmailAddress, GivenName | `
-		Where-Object { $_.distinguishedname -notlike '<#Filter Condition#>' -and ($_.passwordlastset + [timespan]::FromDays(90)) -lt (get-date).AddDays(-10) }
+	$CommandToGetInfoFromAD = Get-ADUser -SearchBase <#OU Name#> -Filter * 
+		-properties PasswordLastSet, PasswordExpired, PasswordNeverExpires, EmailAddress, GivenName 
+		#| Where-Object { $_.distinguishedname -notlike '<#Filter Condition#>' -and ($_.passwordlastset + [timespan]::FromDays(90)) -lt (get-date).AddDays(-10) }
            
 }
 
@@ -78,7 +78,7 @@ foreach ($ADs in $CommandToGetInfoFromAD) {
 		if ($DaysLeft -lt $DaysBeforeExpiry) {
 			$MailProperties = @{
 				From       = $From
-				To         = $Ads.MailAddress
+				To         = $Ads.EmailAddress
 				Subject    = $MailSubject
 				SMTPServer = $SMTPServer
 			}
