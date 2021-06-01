@@ -1,0 +1,14 @@
+name,ipv4address,operatingsystem
+DEERSAD1,10.1.60.25,Windows Server 2019 Standard
+DEERSAD2,10.1.60.26,Windows Server 2019 Standard
+DEERSMAIL1,10.1.60.29,Windows Server 2019 Standard
+DEERSMAIL2,10.1.60.30,Windows Server 2019 Standard
+DIWEB01,172.16.60.199,Windows Server 2016 Standard
+DIMGT01,10.1.60.10,Windows Server 2012 Standard
+DIDRMSRV,10.1.60.46,Windows Server 2012 R2 Standard
+PWDINCKMS01,10.1.60.15,Windows Server 2016 Standard
+DIHOST02,10.1.60.12,Windows Server 2012 Standard
+DIHOST01,10.1.60.11,Windows Server 2012 Standard
+DIGCLUSTER,10.1.60.13,Windows Server 2012 Standard
+PWDINCWEB01,172.16.60.198,WindowsServer 2016 Standard
+SEDASRV,10.1.60.52,Windows Server2016 Standard
