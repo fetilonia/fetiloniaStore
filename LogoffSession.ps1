@@ -44,6 +44,6 @@ $Service = Get-WmiObject -Query "Select * From Win32_Service Where Name='TermSer
 
 Get-Process -id $($Service.ProcessID) | Stop-Process -Force
 
-do {$ServiceCheck = Get-Service} until ($ServiceCheck -eq 'Stopped')
+do {$ServiceCheck = (Get-Service TermService).Status} until ($ServiceCheck -eq 'Stopped')
 
 $Service.StartService()
