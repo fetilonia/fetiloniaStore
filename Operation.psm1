@@ -1,89 +1,23 @@
 <#
 .SYNOPSIS
-  운영에 필요한 스크립트 모듈
-
+  
 .DESCRIPTION
-  Update Log
-  20-07-07 
-  - Command : C / ComputerName Parm [string[]] 다중입력 변경
-  - Command : Test-Role / CustomHashTable Print Out , OnlineCheck, WinRM Service AutoStart 수정
-  20-08-21
-  Version 1.1 Log   
-  - 지문 CP 등록정보 쿼리 명령어 로직 및 FunctionName 변경 (CheckCP > CPQ)
-  - AD Computer 개체 조회 명령어 Array Input 허용 (q)
-  20-09-15
-  - 조회를 제외한 변경 작업 Function 에 대한 고급 매개변수 추가 (SupportShouldProcess)
-    > 명령 실행 시 확인 단계 추가
-  - Prompt Customize 
-    > [HH:mm:ss]{Runas Account}@CurrentLocation>  프롬프트 변경
-    > MM-dd 운영용 관리자 콘솔 - ID(RunSpace Console Process ID) 타이틀 바 변경
-  - Function List Update
-    > TerminalLog, ManualPasswordReset
-  - 콘솔 작업 로그 기록 
-    > PowerShell_WorkingLog_(ProcessID)_YY-MM-DD 형식으로 저장
-
+  Functino Array
 .EXAMPLE
   적용 방법
   Ctrl + G Line Number 바로가기
 
-  131Line - "secuad\MyAccount" , "MyPassWord" 수정
+  131Line - "Domain\MyAccount" , "MyPassWord" 수정
   139Line - 'MyLogPath' 수정
   509Line - 'MyPath' 수정
   
 .NOTES
-  원격 유저 세션에 로컬 펑션을 사용하고 싶을 때는 -ScriptBlock ${function} 형식으로 지정한다
-
   Module Version 1.0.0 Function List
   
   Version 1.2
 
  #Requires -RunAsAdministrator
-
-#region Function List
-
-  ┌───────────────────────────────────────────────────────────────────────────────────────────────────
-  │   Function List   │                          Description 
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │Get-hostname      │ IP or Hostname 으로 쿼리 시 쿼리 반대정보 출력 (ex)hostname > ip)
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │Get-Info          │ PC 정보 쿼리 (중복제거 X)
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │Get-KB            │ Update 세션 호출 후 보안업데이트 검색자 쿼리
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │Get-LogonUsers     │ Posh V3 이전 ADSI Assembly 를 통한 로컬그룹 유저 쿼리
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │get-reg            │ Registry Tree Type Table Sort
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │Get-Software       │ Install SW Query
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │modify-logonuser   │ Posh V3 이전 ADSI Assembly 를 통한 로컬그룹 유저 편집
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │OldJava            │ 최신 배포버전 이하 자바 삭제
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │q                  │ PC 정보 쿼리 (중복제거 O)
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │RDMSG              │ 원격PC 메시지 Send (RDSession)
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │RDP-Check          │ RDP Setting 관련 정보 쿼리
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │REPDC              │ DC Site 복제 
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │RestorePermission  │ Reg Default.\  Key 권한 복구
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │tc                 │ 네트워크 온라인 테스트
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │Test-Role          │ 현 사용자 권한 정보 테스트
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │UL                 │ 잠금 사용자 언락 (전체 DC)
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │wrm                │ Enter PoSH Remote Session 
-  ├───────────────────────────────────────────────────────────────────────────────────────────────────
-  │AccountGroups      │ Query Target Groups 
-  └────────────────────────────────────────────────────────────────────────────────────────────────────
-  │ManualPasswordReset│ 패스워드 수동 변경
-  └────────────────────────────────────────────────────────────────────────────────────────────────────
-  │TerminalLog        │ 접속실패 Log Format Customize
-  └────────────────────────────────────────────────────────────────────────────────────────────────────
+  
 #>
 
 #endregion Function List
@@ -104,9 +38,6 @@ $Global:char = [char]27
 
 # 모듈정보 제공 섹션
 #$FilePath = "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\Operation"
-Import-Module 'D:\업무관련\Script\PowerShell Module\Operation\Win32_OperatingSystem.cdxml' -Verbose
-Import-Module 'D:\업무관련\Script\PowerShell Module\Operation\Win32_Service.cdxml' -Verbose
-
 
 <# 콘솔 커스터마이징 섹션
 $Date = "{0:yyMMdd}" -f (Get-Date)
