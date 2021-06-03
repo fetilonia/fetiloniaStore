@@ -35,7 +35,6 @@ foreach ($data in $1) {
 
 $LogoffSession = $Result | Where-Object { $_.logondate -lt ("{0:yyyy-MM-dd}" -f ((get-date).AddDays(-5))) } 
 
-
 foreach ($ID in $LogoffSession) {
     Start-Process Logoff -ArgumentList " $($Logoff.ID)"
 }
