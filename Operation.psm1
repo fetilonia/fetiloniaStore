@@ -73,7 +73,7 @@ Start-Transcript -Path "$LogPath\$date\$LogFileName"
 
 #region Function Group
 
-# 프롬프트 커스터마이징
+# 프롬프트 커스터마이징 (pwsh 5.0 higher)
 function prompt {
   $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
   $principal = [Security.Principal.WindowsPrincipal] $identity
@@ -83,6 +83,19 @@ function prompt {
   $Host.UI.RawUI.WindowTitle = "$("{0:MM-dd}" -f (Get-Date)) Powershell 관리자 콘솔 - ID($PID)"
 
 }
+
+# 프롬프트 커스터마이징 (pwsh 5.0 lower)
+function prompt {
+    #$char = [char]27
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = [Security.Principal.WindowsPrincipal] $identity
+    $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
+      
+    "[$("{0:yyyy-MM-dd HH:mm:ss}" -f(Get-Date))]$(if($principal.IsInRole($adminRole)){'[ADMIN]'}else{'[USER]'})`@$($ExecutionContext.SessionState.Path.CurrentLocation)$('>' * ($NestedPromptLevel + 1)) "
+    $Host.UI.RawUI.WindowTitle = "$("{0:MM-dd}" -f (Get-Date)) NPMESDL01 Administrators 그룹 멤버 - ID($PID)"
+  
+  }
+
 #>
 # 현재 실행 계정이 속한 그룹 Boolean
 Function Test-Role {
@@ -1052,3 +1065,36 @@ function Get-CimSessionRecord {
 
   $VerbosePreference = 'SilentlyContinue'
 }
+
+
+function Permissions {            
+
+    param($GpoName = $ComboBox.SelectedItem)
+    Import-Module GroupPolicy            
+  
+    $permsobj = Get-GPPermissions -Server IMADTP.samsungsecurities.local -Name $GPOName -All
+    foreach ($perm in $permsobj) {            
+  
+      $obj = New-Object -TypeName PSObject -Property @{
+        GPOName     = $GPOName
+        AccountName = $($perm.trustee.name)
+        AccountType = $($perm.trustee.sidtype.tostring())
+        Permissions = $($perm.permission)
+      }
+  
+      $obj | Select-Object GPOName, AccountName, AccountType, Permissions            
+  
+    }
+  }
+  
+  $SearchButtonFunction = {
+    $name = $TextBox.Text
+                         
+    $GPOReesult = Get-GPO -All | Where-Object { $_.displayname -like "*$name*" } | Sort-Object Displayname -Unique | Select-Object -ExpandProperty DisplayName
+    foreach ($GPO in $GPOReesult) { $ComboBox.Items.Add($GPO) }        
+          
+    $ComboBox.Visible = $True
+    $ComboBox.SelectedIndex = 0
+    $ModeGroupBox.Enabled = $True
+  }
+  

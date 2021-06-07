@@ -6,4 +6,4 @@ Email       ,Extract  ,"'(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b'"    ,Ex
 MiddleText  ,Extract  ,"'(?<=@)(.*\n?)(?=.com)'"                             ,Extract with Define Start and End Text
 
 
-https://docs.microsoft.com/en-US/SkypeForBusiness/troubleshoot/server-exchange-integration/mapi-unavailable
+
