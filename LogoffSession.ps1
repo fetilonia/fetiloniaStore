@@ -32,17 +32,28 @@ foreach ($data in $1) {
         }
     }
 }
+        
+foreach ($ID in $Result) {
+        
+    $LogoffSession = [regex]::match($ID.RestTime, '[\d]{1,2}\+','').Result
 
-$LogoffSession = $Result | Where-Object { $_.logondate -lt ("{0:yyyy-MM-dd}" -f ((get-date).AddDays(-5))) } 
-
-foreach ($ID in $LogoffSession) {
-    Start-Process Logoff -ArgumentList " $($Logoff.ID)"
+    if ($LogoffSession -eq 'success') {
+        if (([TimeSpan]$ID.RestTime).Hours -gt 4 ) {
+            Start-Process Logoff -ArgumentList " $($Logoff.ID)"
+        }
+    }
+    else {
+        if (([TimeSpan]$ID.RestTime).Hours -gt 4 ) {
+            Start-Process Logoff -ArgumentList " $($Logoff.ID)"
+        }
+    }
 }
 
+
 $Service = Get-WmiObject -Query "Select * From Win32_Service Where Name='TermService'"
-
+        
 Get-Process -id $($Service.ProcessID) | Stop-Process -Force
-
-do {$ServiceCheck = (Get-Service TermService).Status} until ($ServiceCheck -eq 'Stopped')
-
+        
+do { $ServiceCheck = (Get-Service TermService).Status } until ($ServiceCheck -eq 'Stopped')
+        
 $Service.StartService()
