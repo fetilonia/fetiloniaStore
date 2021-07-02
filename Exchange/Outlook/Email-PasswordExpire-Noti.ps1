@@ -2,14 +2,15 @@
 이 스크립트는 DC 의 모든 사용자 중 패스워드 만료일자가 90일이 지났지만
 Today - 10 보다 낮은 User Object 를 필터링 후 개체의 Email 주소로 $From 변수의 주소로 메일을 작성한다.
 
-Line 15, 21, 34, 61 을 수정해서 사용하면 된다.
+Line 18, 24, 35, 64 을 수정해서 사용하면 된다.
 
 Created by : fetilonia
 
 #>
 
+begin {
 
-################################
+    ################################
 #region      Variables         #
 ################################
 
@@ -39,8 +40,10 @@ $TestingUsername = "Test User SamAccountName"
 ################################
 #endregion Variables           #
 ################################
+}
 
-### Attempts to Import ActiveDirectory Module. Produces error if fails.
+process {
+    ### Attempts to Import ActiveDirectory Module. Produces error if fails.
 
 Try { Import-Module ActiveDirectory -ErrorAction Stop }
 Catch { Write-Host "Unable to load Active Directory module, is RSAT installed?"; Break }
@@ -139,10 +142,18 @@ E-Mail : <a href="mailto:ithelpdesk@noroo.com">ithelpdesk@noroo.com</a></span>
 	
 }
 
+}
 
-
-<#
+end {
+    <#
 Version Notes:
 1.0 - Intial Release - 기본 프레임워크 생성 및 검색 조건자 지정. ((패스워드 변경일자 + 90일)<(오늘날짜 - 10))
 					   HTML 기본 형식 지정. 추후 CSS Style 지정 후 지저분한 Line 별 Span Type 수정 예정.
 #>
+
+$CommandToGetInfoFromAD |  Export-Csv -NoTypeInformation -NoClobber -Encoding UTF8 -Path "<TargetPath>\$(get-date -f 'yyyy-MM-dd')`_PasswordExpiredUser.csv"
+
+}
+
+
+
