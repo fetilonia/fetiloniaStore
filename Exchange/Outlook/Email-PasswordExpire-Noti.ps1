@@ -103,33 +103,8 @@ $(if($DaysLeft -lt 0) {'현재 사용 중인 비밀 번호가 <b>만료</b> 되�
 <br><br>
 $(if($DaysLeft -lt 0) {'비밀번호를 <span style="color: rgb(255, 0, 0);"><b>변경</b></style> <span style = "color: rgb(0,0,0)";>하셔야 합니다.</span><br><br> <span style = "color: rgb(0,0,0)";>비밀번호를 변경하지 않게 되면 원활한 서비스를 이용하실 수 없습니다.</span><br><br>'} 
 	else {'비밀번호 만료 이전에 비밀번호가 <span style="color: rgb(255, 0, 0);"><b>변경</b></span>되지 않으면 사용중인 서비스는 이용이 중지 됩니다.<br><br>'})
-<span style = "color: rgb(0,0,0)";>(ex) 개인PC 로그인, Citrix files, Noroo Drive, 이메일, 프린터 etc)</span>
-<br><br><br>
-<h2><span style = "color: rgb(0, 0, 0);font-size: 20pt;font-weight:bold;"><b>비밀번호 변경 방법</b></span></h2>
-<span style = "color: rgb(0,0,0)";>CTRL + ALT + DEL을 누르고 <b>"암호 변경"</b>을 선택하여 Windows 암호를 변경하십시오.</span>
+<span style = "color: rgb(0,0,0)";>(ex) 개인PC 로그인, 이메일, 프린터 etc)</span>
 <br><br>
-암호 변경 방법 ☞ Click <b><a href=$link><span style="font-color: red;font-weight: bold;">(noroo.com)</a></b></span>
-<br><br>
-<h2><span style = "font-size: 20pt;color: rgb(0, 0, 0);"><b>문의 사항</b></span></h2>
-
-
-<span style="color: rgb(0, 121, 172);font-weight: bold;">DIT 고객지원팀 (헬프데스크) Customer Service Team</span>
-<br><br>
-<hr align="left" width="790";>
-<br>
-<div style = "width = 300px, height=200px; margin-left:350px;>
-<div stle ="width=200px;height=150px;text-align:right">
-E-Mail : <a href="mailto:ithelpdesk@noroo.com">ithelpdesk@noroo.com</a></span>
-<br>
-협업사이트 : <a href="https://ecm.noroo.com/cop/help" target="_blank">ecm.noroo.com/cop/help</a>
-<br>
-정책 문의 및 장애 접수 : <b>1833-8373</b>
-<br><br>
-<span style="font-size:15pt";><b>그룹 시스템 관리자</b></style>
-<br>
-<b><a href="mailto:email@domain.com">nrgsysadmin@noroo.com</a></b>
-</div>
-</div>
 "@
 			
 			
